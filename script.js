@@ -66,3 +66,15 @@ const calculate = () => {
     currentNumber = result
     calculationOperation = ''
 }
+const clearBtn = document.querySelector(".all-clear")
+clearBtn.addEventListener("click", () => {
+    // console.log('AC button is pressed')
+    clearAll()
+    updateScreen(currentNumber)
+})
+
+const clearAll = () => {
+    prevNumber = '';
+    operation = '';
+    currentNumber = '0';
+}
