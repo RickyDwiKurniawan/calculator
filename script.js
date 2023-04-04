@@ -32,31 +32,28 @@ operators.forEach((operator) => {
   });
 });
 
+const percentages = document.querySelector(".percentage");
+percentages.addEventListener("click", (e) => {
+  // console.log(e.target.value)
+  percent(e.target.value);
+  updateScreen(currentNumber);
+});
+
+const percent = (per) => {
+  // currentNumber += per
+  // if (currentNumber.includes(".")) {
+  //   return;
+  // }
+  // currentNumber += per;
+  currentNumber=currentNumber/100
+};
 const inputOperator = (operator) => {
-  // calculationOperator = operator
-
-  // if(calculationOperator === '-' || calculationOperator === '+' || calculationOperator === '*' || calculationOperator === '/'){
-  //     let Operat = '-'
-  //     let Operat2 = '+'
-  //     let Operat3 = '*'
-  //     let Operat4 = '/'
-  //     if (Operat === prevNumber || Operat2 === prevNumber || Operat3 === prevNumber || Operat4 === prevNumber ){
-  //         prevNumber = currentNumber
-  //         calculationOperator = operator
-  //         currentNumber = '0'
-  //     }
-  //     else{
-  //         prevNumber = currentNumber
-  //         calculationOperator = operator
-
-  //         currentNumber = ''
-  //     }
-  // }
-  // else{
-  //     prevNumber = currentNumber
-  //     calculationOperator = operator
-  //     currentNumber = ''
-  // }
+  
+  if(currentNumber == '') return
+  if(prevNumber !== ''){
+    calculate()
+  }
+ 
   prevNumber = currentNumber;
   calculationOperator = operator;
   currentNumber = "";
@@ -70,6 +67,7 @@ equalSign.addEventListener("click", () => {
 
 const calculate = () => {
   let result = "";
+  if (isNaN(prevNumber) || isNaN(currentNumber)) return
   switch (calculationOperator) {
     case "+":
       result = parseFloat(prevNumber) + parseFloat(currentNumber);
@@ -83,14 +81,16 @@ const calculate = () => {
     case "/":
       result = parseFloat(prevNumber) / parseFloat(currentNumber);
       break;
-    case "%":
-      result = parseFloat(prevNumber) / 100;
-      break;
+    // case "%":
+    //   result = parseFloat(prevNumber) / 100;
+    //   break;
     default:
       return;
   }
   currentNumber = result;
-  calculationOperator = "";
+  // calculationOperator = "";
+  calculationOperator = undefined;
+  prevNumber = ''
 };
 const clearBtn = document.querySelector(".all-clear");
 clearBtn.addEventListener("click", () => {
